@@ -10,13 +10,13 @@ The persistence is obtained using an in memory H2 database, but can be easily mo
 
 ### Build
 
-From the project root run:
+From the project root run:\s\s
 `mvn package`
 
 ### Run
 
-Go to target folder and run from java:
-`cd target`
+Go to target folder and run from java:\s\s
+`cd target`\s\s
 `java -jar social.jar`
 
 To exit the program type `=`
