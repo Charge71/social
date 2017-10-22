@@ -23,7 +23,7 @@ public class Launcher {
 
 		Parser parser = new Parser();
 
-		try (OperationPlayer op = new OperationPlayer()) {
+		try (OperationPlayer op = new OperationPlayer("social-pu")) {
 
 			try (Scanner scanner = new Scanner(System.in)) {
 				while (true) {

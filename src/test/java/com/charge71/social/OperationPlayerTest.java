@@ -21,7 +21,7 @@ public class OperationPlayerTest {
 
 	@BeforeClass
 	public static void init() {
-		op = new OperationPlayer();
+		op = new OperationPlayer("social-pu-test");
 	}
 
 	@AfterClass

@@ -34,8 +34,14 @@ class OperationPlayer implements AutoCloseable {
 	protected final EntityManager em;
 	private final EntityManagerFactory emf;
 
-	OperationPlayer() {
-		emf = Persistence.createEntityManagerFactory("social-pu");
+	/**
+	 * Creates a new operation player using the given persistence unit.
+	 * 
+	 * @param puName
+	 *            the name of the persistence unit to use
+	 */
+	OperationPlayer(String puName) {
+		emf = Persistence.createEntityManagerFactory(puName);
 		em = emf.createEntityManager();
 	}
 
