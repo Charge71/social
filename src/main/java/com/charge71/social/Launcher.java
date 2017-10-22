@@ -6,6 +6,8 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.charge71.social.impl.OperationPlayerImpl;
+import com.charge71.social.impl.ParserImpl;
 import com.charge71.social.operations.Operation;
 
 /**
@@ -22,10 +24,10 @@ public class Launcher {
 	public static void main(String[] args) throws Exception {
 
 		// create new parser
-		Parser parser = new Parser();
+		Parser parser = new ParserImpl();
 
 		// create new operation player
-		try (OperationPlayer op = new OperationPlayer("social-pu")) {
+		try (OperationPlayer op = new OperationPlayerImpl("social-pu")) {
 
 			// scan the input line
 			try (Scanner scanner = new Scanner(System.in)) {

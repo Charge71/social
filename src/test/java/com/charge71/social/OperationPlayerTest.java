@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.charge71.social.entities.PostEntity;
 import com.charge71.social.entities.SubscriptionEntity;
 import com.charge71.social.entities.SubscriptionId;
+import com.charge71.social.impl.OperationPlayerImpl;
 import com.charge71.social.operations.OperationFollow;
 import com.charge71.social.operations.OperationPost;
 import com.charge71.social.operations.OperationRead;
@@ -17,11 +18,11 @@ import com.charge71.social.operations.OperationWall;
 
 public class OperationPlayerTest {
 
-	private static OperationPlayer op;
+	private static OperationPlayerImpl op;
 
 	@BeforeClass
 	public static void init() {
-		op = new OperationPlayer("social-pu-test");
+		op = new OperationPlayerImpl("social-pu-test");
 	}
 
 	@AfterClass
