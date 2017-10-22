@@ -23,8 +23,23 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 @Entity
 @Table(name = "post")
 @NamedQueries({
-		@NamedQuery(name = "PostEntity.findByUser", query = "SELECT p FROM PostEntity p WHERE p.user = :user ORDER BY p.id DESC"),
-		@NamedQuery(name = "PostEntity.findBySubscription", query = "SELECT p FROM PostEntity p WHERE p.user = :user OR p.user IN (SELECT s.subscriptionId.subscription FROM SubscriptionEntity s WHERE s.subscriptionId.user = :user) ORDER BY p.id DESC") })
+	
+		/**
+		 * Select all posts by a user.
+		 */
+		@NamedQuery(name = "PostEntity.findByUser",
+				    query = "SELECT p FROM PostEntity p WHERE p.user = :user ORDER BY p.id DESC"),
+
+		/**
+		 * Select all posts by a user and by the users he folloes.
+		 */
+		@NamedQuery(name = "PostEntity.findBySubscription",
+		            query = "SELECT p FROM PostEntity p "
+						+ "WHERE p.user = :user OR p.user IN "
+						+ "(SELECT s.subscriptionId.subscription FROM SubscriptionEntity s "
+						+ "WHERE s.subscriptionId.user = :user) ORDER BY p.id DESC")
+
+})
 public class PostEntity {
 
 	@Id

@@ -21,26 +21,34 @@ public class Launcher {
 
 	public static void main(String[] args) throws Exception {
 
+		// create new parser
 		Parser parser = new Parser();
 
+		// create new operation player
 		try (OperationPlayer op = new OperationPlayer("social-pu")) {
 
+			// scan the input line
 			try (Scanner scanner = new Scanner(System.in)) {
 				while (true) {
 					System.out.print("> ");
 					String input = scanner.nextLine();
 					logger.debug("Input: " + input);
 					if (input.equals("=")) {
+						// exit
 						System.out.println("Goodbye.");
 						break;
 					} else {
+						// parse operation
 						Operation operation = parser.parse(input);
 						if (operation != null) {
+							// execute the operation
 							List<String> list = op.play(operation);
+							// print the lines returned after the execution
 							for (String output : list) {
 								System.out.println(output);
 							}
 						} else {
+							// operation was null
 							System.out.println("Unknown command");
 						}
 					}

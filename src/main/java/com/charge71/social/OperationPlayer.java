@@ -46,16 +46,18 @@ class OperationPlayer implements AutoCloseable {
 	}
 
 	/**
-	 * Executes the given operation.
+	 * Executes the given operation and return al list of string to be printed.
 	 * 
 	 * @param op
 	 *            the operation to execute
+	 * @return a list of strings to print out
 	 */
 	protected List<String> play(Operation op) {
 
 		logger.info("Processing " + op);
 
 		if (op instanceof OperationPost) {
+			// create and persist the new post
 			OperationPost opPost = (OperationPost) op;
 			PostEntity post = new PostEntity();
 			post.setUser(opPost.getUser());
@@ -67,6 +69,7 @@ class OperationPlayer implements AutoCloseable {
 			logger.info("Persisted " + post);
 			return new ArrayList<>();
 		} else if (op instanceof OperationRead) {
+			// find all posts by the given user
 			OperationRead opRead = (OperationRead) op;
 			TypedQuery<PostEntity> query = em.createNamedQuery("PostEntity.findByUser", PostEntity.class);
 			query.setParameter("user", opRead.getUser());
@@ -81,6 +84,7 @@ class OperationPlayer implements AutoCloseable {
 			}
 			return result;
 		} else if (op instanceof OperationFollow) {
+			// create and persist new subscription
 			OperationFollow opFollow = (OperationFollow) op;
 			SubscriptionId id = new SubscriptionId();
 			id.setUser(opFollow.getUser());
@@ -88,11 +92,13 @@ class OperationPlayer implements AutoCloseable {
 			SubscriptionEntity sub = new SubscriptionEntity();
 			sub.setSubscriptionId(id);
 			em.getTransaction().begin();
-			em.persist(sub);
+			// using merge here in case of existing subscription
+			em.merge(sub);
 			em.getTransaction().commit();
 			logger.info("Persisted " + sub);
 			return new ArrayList<>();
 		} else if (op instanceof OperationWall) {
+			// find all posts by a user an all the users he follows
 			OperationWall opWall = (OperationWall) op;
 			TypedQuery<PostEntity> query = em.createNamedQuery("PostEntity.findBySubscription", PostEntity.class);
 			query.setParameter("user", opWall.getUser());
@@ -108,6 +114,7 @@ class OperationPlayer implements AutoCloseable {
 			}
 			return result;
 		}
+		// here unknown operation
 		logger.warn("Unknown operation " + op);
 		return null;
 
