@@ -14,7 +14,7 @@ public class ParserTest {
 
 	@Test
 	public void testRead() {
-		ParserImpl parser = new ParserImpl();
+		Parser parser = new ParserImpl();
 		Operation op = parser.parse("Test");
 		Assert.assertNotNull(op);
 		Assert.assertTrue(op instanceof OperationRead);
@@ -23,7 +23,7 @@ public class ParserTest {
 
 	@Test
 	public void testPost() {
-		ParserImpl parser = new ParserImpl();
+		Parser parser = new ParserImpl();
 		Operation op = parser.parse("Test -> Hi there!");
 		Assert.assertNotNull(op);
 		Assert.assertTrue(op instanceof OperationPost);
@@ -34,7 +34,7 @@ public class ParserTest {
 
 	@Test
 	public void testFollow() {
-		ParserImpl parser = new ParserImpl();
+		Parser parser = new ParserImpl();
 		Operation op = parser.parse("Test follows Foo");
 		Assert.assertNotNull(op);
 		Assert.assertTrue(op instanceof OperationFollow);
@@ -45,7 +45,7 @@ public class ParserTest {
 
 	@Test
 	public void testWall() {
-		ParserImpl parser = new ParserImpl();
+		Parser parser = new ParserImpl();
 		Operation op = parser.parse("Test wall");
 		Assert.assertNotNull(op);
 		Assert.assertTrue(op instanceof OperationWall);
@@ -54,7 +54,7 @@ public class ParserTest {
 
 	@Test
 	public void testUnknown() {
-		ParserImpl parser = new ParserImpl();
+		Parser parser = new ParserImpl();
 		Operation op = parser.parse("Test test");
 		Assert.assertNull(op);
 	}
